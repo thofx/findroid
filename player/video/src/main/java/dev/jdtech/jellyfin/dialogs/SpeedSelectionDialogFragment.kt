@@ -12,8 +12,8 @@ class SpeedSelectionDialogFragment(
     private val viewModel: PlayerActivityViewModel
 ) : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val speedTexts = listOf("0.5x", "0.75x", "1x", "1.25x", "1.5x", "1.75x", "2x")
-        val speedNumbers = listOf(0.5f, 0.75f, 1f, 1.25f, 1.5f, 1.75f, 2f)
+        val speedTexts = listOf("0.5x", "1x", "1.5x", "2x", "3x")
+        val speedNumbers = listOf(0.5f, 1f, 1.5f, 2f, 3f)
 
         return activity?.let { activity ->
             val builder = MaterialAlertDialogBuilder(activity)
