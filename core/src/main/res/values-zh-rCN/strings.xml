@@ -185,4 +185,5 @@
     <string name="downloaded_indicator">下载指示器</string>
     <string name="episode_name_with_end">%1$d-%2$d. %3$s</string>
     <string name="episode_name_extended_with_end">S%1$d:E%2$d-%3$d - %4$s</string>
+    <string name="fast_playing">倍速播放中</string>
 </resources>
