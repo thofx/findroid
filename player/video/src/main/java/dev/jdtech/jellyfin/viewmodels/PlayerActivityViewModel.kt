@@ -61,6 +61,9 @@ constructor(
     private val _currentTrickPlay = MutableStateFlow<BifData?>(null)
     val currentTrickPlay = _currentTrickPlay.asStateFlow()
 
+    private val _currentProcess = MutableLiveData<Int>()
+    val currentProcess: LiveData<Int> = _currentProcess
+
     var currentAudioTracks: MutableList<MPVPlayer.Companion.Track> = mutableListOf()
     var currentSubtitleTracks: MutableList<MPVPlayer.Companion.Track> = mutableListOf()
 
@@ -188,7 +191,7 @@ constructor(
                 Timber.e(e)
             }
         }
-
+        _currentProcess.value = 0
         _currentTrickPlay.value = null
         playWhenReady = player.playWhenReady
         playbackPosition = position
@@ -209,12 +212,17 @@ constructor(
                                 player.currentPosition.times(10000),
                                 !player.isPlaying
                             )
+
+                            val position = player.currentPosition
+                            val duration = player.duration
+                            _currentProcess.value = position.div(duration.toFloat()).times(100).toInt()
+
                         } catch (e: Exception) {
                             Timber.e(e)
                         }
                     }
                 }
-                handler.postDelayed(this, 5000L)
+                handler.postDelayed(this, 1000L)
             }
         }
         val introCheckRunnable = object : Runnable {

@@ -87,4 +87,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <ProgressBar
+        android:id="@+id/player_bottom_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="bottom"
+        android:max="100"
+        android:progress="0"
+        android:progressDrawable="@drawable/player_progressbar_bottom"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
 </merge>

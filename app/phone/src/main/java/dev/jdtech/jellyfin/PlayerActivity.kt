@@ -10,12 +10,16 @@ import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.media3.common.C
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.DefaultTimeBar
+import androidx.media3.ui.PlayerView
 import androidx.media3.ui.TrackSelectionDialogBuilder
 import androidx.navigation.navArgs
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,12 +28,12 @@ import dev.jdtech.jellyfin.dialogs.SpeedSelectionDialogFragment
 import dev.jdtech.jellyfin.dialogs.TrackSelectionDialogFragment
 import dev.jdtech.jellyfin.mpv.MPVPlayer
 import dev.jdtech.jellyfin.mpv.TrackType
-import dev.jdtech.jellyfin.player.video.R as PlayerVideoR
 import dev.jdtech.jellyfin.utils.PlayerGestureHelper
 import dev.jdtech.jellyfin.utils.PreviewScrubListener
 import dev.jdtech.jellyfin.viewmodels.PlayerActivityViewModel
-import javax.inject.Inject
 import timber.log.Timber
+import javax.inject.Inject
+import dev.jdtech.jellyfin.player.video.R as PlayerVideoR
 
 var isControlsLocked: Boolean = false
 
@@ -80,6 +84,15 @@ class PlayerActivity : BasePlayerActivity() {
 
         viewModel.currentItemTitle.observe(this) { title ->
             videoNameTextView.text = title
+        }
+
+        val playerBottomProgress = binding.playerView.findViewById<ProgressBar>(R.id.player_bottom_progress)
+        binding.playerView.setControllerVisibilityListener(PlayerView.ControllerVisibilityListener {
+            playerBottomProgress.visibility = if (it == View.VISIBLE) View.GONE else View.VISIBLE
+        })
+
+        viewModel.currentProcess.observe(this) { progress ->
+            playerBottomProgress.progress = progress
         }
 
         val audioButton = binding.playerView.findViewById<ImageButton>(R.id.btn_audio_track)
@@ -237,5 +250,16 @@ class PlayerActivity : BasePlayerActivity() {
 
         viewModel.initializePlayer(args.items)
         hideSystemUI()
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (isControlsLocked) {
+                    Toast.makeText(this@PlayerActivity, "请先解锁🔓屏幕", Toast.LENGTH_SHORT).show()
+                }else{
+                    finish()
+                }
+            }
+        })
     }
+
 }
