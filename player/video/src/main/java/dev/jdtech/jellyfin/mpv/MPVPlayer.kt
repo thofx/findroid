@@ -1336,7 +1336,7 @@ class MPVPlayer(
             val title: String,
             val lang: String,
             val external: Boolean,
-            val selected: Boolean,
+            var selected: Boolean,
             val externalFilename: String?,
             val ffIndex: Int,
             val codec: String,

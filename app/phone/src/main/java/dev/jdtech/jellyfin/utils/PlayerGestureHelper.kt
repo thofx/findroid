@@ -84,7 +84,7 @@ class PlayerGestureHelper(
             }
 
             override fun onLongPress(e: MotionEvent) {
-                if (isControlsLocked) return
+                if (isControlsLocked || (SystemClock.elapsedRealtime() - lastScaleEvent) <= 200) return
                 showFastPlayLayout()
                 lastPlaySpeed = activity.viewModel.playbackSpeed
                 playerView.player?.apply {

@@ -323,6 +323,15 @@ constructor(
         if (player is MPVPlayer) {
             player.selectTrack(trackType, id = track.id)
             disableSubtitle = track.ffIndex == -1
+            if (trackType == TrackType.AUDIO) {
+                currentAudioTracks.forEach {
+                    it.selected = it == track
+                }
+            } else if (trackType == TrackType.SUBTITLE){
+                currentSubtitleTracks.forEach {
+                    it.selected = it == track
+                }
+            }
         }
     }
 
