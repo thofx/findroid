@@ -63,7 +63,7 @@
                 android:layout_gravity="end"
                 android:layout_weight="1"
                 android:background="@drawable/transparent_circle_background"
-                android:contentDescription="Locks the player"
+                android:contentDescription="@string/player_controls_lock"
                 android:padding="16dp"
                 android:src="@drawable/ic_lock"
                 app:tint="@android:color/white" />

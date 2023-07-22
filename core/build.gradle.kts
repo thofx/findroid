@@ -39,9 +39,9 @@ android {
 }
 
 ktlint {
+    version.set("0.50.0")
     android.set(true)
     ignoreFailures.set(false)
-    disabledRules.add("max-line-length")
 }
 
 dependencies {
@@ -59,11 +59,7 @@ dependencies {
     implementation(libs.androidx.paging)
     implementation(libs.androidx.preference)
     implementation(libs.androidx.room.runtime)
-    kapt(libs.androidx.room.compiler)
-    implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.work)
-    implementation(libs.glide)
-    kapt(libs.glide.compiler)
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
     implementation(libs.jellyfin.core)

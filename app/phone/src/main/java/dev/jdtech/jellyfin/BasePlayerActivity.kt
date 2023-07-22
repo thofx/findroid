@@ -30,6 +30,7 @@ abstract class BasePlayerActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
+
         viewModel.playWhenReady = viewModel.player.playWhenReady == true
         viewModel.player.playWhenReady = false
     }
@@ -59,7 +60,7 @@ abstract class BasePlayerActivity : AppCompatActivity() {
     protected fun isRendererType(
         mappedTrackInfo: MappingTrackSelector.MappedTrackInfo,
         rendererIndex: Int,
-        type: Int
+        type: Int,
     ): Boolean {
         val trackGroupArray = mappedTrackInfo.getTrackGroups(rendererIndex)
         if (trackGroupArray.length == 0) {

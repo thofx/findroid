@@ -35,7 +35,7 @@ android {
             isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
         register("staging") {
@@ -76,9 +76,9 @@ android {
 }
 
 ktlint {
+    version.set("0.50.0")
     android.set(true)
     ignoreFailures.set(false)
-    disabledRules.add("max-line-length")
 }
 
 dependencies {
@@ -105,10 +105,10 @@ dependencies {
     implementation(libs.androidx.preference)
     implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.recyclerview.selection)
-    implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.androidx.work)
-    implementation(libs.glide)
+    implementation(libs.coil)
+    implementation(libs.coil.svg)
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
     implementation(libs.jellyfin.core)

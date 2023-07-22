@@ -29,9 +29,9 @@ android {
 }
 
 ktlint {
+    version.set("0.50.0")
     android.set(true)
     ignoreFailures.set(false)
-    disabledRules.add("max-line-length")
 }
 
 dependencies {
